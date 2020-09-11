@@ -13,18 +13,18 @@ namespace FormApp.Controllers
     [ApiController]
     public class SaveController : ControllerBase
     {
-        public SaveController(IConfiguration _configuration)
+        public SaveController(IConfiguration configuration)
         {
-            configuration = _configuration;
+            _configuration = configuration;
         }
 
-        private IConfiguration configuration;
+        private readonly IConfiguration _configuration;
 
         [HttpPost]
         public async Task<string> PostAsync([FromBody] JsonElement json)
         {
-            var uri = new Uri(configuration["elasticsearch:url"]);
-            var index = configuration["elasticsearch:index"];
+            var uri = new Uri(_configuration["elasticsearch:url"]);
+            var index = _configuration["elasticsearch:index"];
 
             var settings = new ConnectionConfiguration(uri);
 
