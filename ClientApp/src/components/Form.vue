@@ -1,5 +1,5 @@
 <template>
-    <div class="col-md-8 rounded px-5 py-4 shadow bg-white text-left mx-auto">
+    <div class="col-md-8 rounded px-5 py-4 shadow bg-white text-left mt-3">
         <form id="form" v-on:submit.prevent="submit">
             <div class="row">
                 <div class="col-12 form-group">

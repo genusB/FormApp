@@ -12,12 +12,9 @@
       </ul>
     </nav>
     
-    <div class="container-fluid h-100 bg-body">
-      <div class="row h-100">
-          <div class="col-3 bg-plane d-flex justify-content-center align-items-center">
-            <img class="d-none d-md-block" alt="Plane logo" src="./assets/logo.png" width="100">
-          </div>
-        <div class="col-md-9 h-100 d-flex justify-content-center align-items-center">
+    <div class="container-fluid bg-body">
+      <div class="row">
+        <div class="col-md-10 d-flex justify-content-center align-items-center mx-auto">
           <router-view></router-view>
         </div>
       </div>
