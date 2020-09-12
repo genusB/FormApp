@@ -30,8 +30,8 @@ namespace FormApp.Controllers
             _elasticClient = new ElasticClient(settings);
         }
 
-        [HttpGet]
-        public async Task<dynamic> Find(string query)
+        [HttpPost]
+        public async Task<dynamic> Find([FromBody]string query)
         {
 
             var response = await _elasticClient.SearchAsync<dynamic>(s => s
