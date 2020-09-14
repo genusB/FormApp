@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Elasticsearch.Net;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Nest;
@@ -23,9 +24,14 @@ namespace FormApp.Controllers
             _logger = logger;
             _configuration = configuration;
 
-            var uri = new Uri(_configuration["elasticsearch:url"]);
             var index = _configuration["elasticsearch:index"];
-            var settings = new ConnectionSettings(uri).DefaultIndex(index);
+            var username = _configuration["elasticsearch:username"];
+            var password = _configuration["elasticsearch:password"];
+            var cloudId = _configuration["elasticsearch:cloud_id"];
+
+            var credentials = new BasicAuthenticationCredentials(username, password);
+            var pool = new CloudConnectionPool(cloudId, credentials);
+            var settings = new ConnectionSettings(pool).DefaultIndex(index);
 
             _elasticClient = new ElasticClient(settings);
         }

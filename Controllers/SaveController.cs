@@ -23,10 +23,16 @@ namespace FormApp.Controllers
         [HttpPost]
         public async Task<string> PostAsync([FromBody] JsonElement json)
         {
-            var uri = new Uri(_configuration["elasticsearch:url"]);
             var index = _configuration["elasticsearch:index"];
+            var username = _configuration["elasticsearch:username"];
+            var password = _configuration["elasticsearch:password"];
+            var cloudId = _configuration["elasticsearch:cloud_id"]; 
 
-            var settings = new ConnectionConfiguration(uri);
+            var credentials = new BasicAuthenticationCredentials(username, password);
+            
+            var pool = new CloudConnectionPool(cloudId, credentials);
+
+            var settings = new ConnectionConfiguration(pool);
 
             var lowlevelClient = new ElasticLowLevelClient(settings);
 
